@@ -1,9 +1,6 @@
 <?php
 
-namespace R301\modele\utilisateur;
-
-use Cassandra\Date;
-use R301\Modele\Joueur\JoueurStatut;
+require_once(__DIR__ . '/../Joueur/JoueurStatut.php');
 
 class Utilisateur {
     private readonly string $login;

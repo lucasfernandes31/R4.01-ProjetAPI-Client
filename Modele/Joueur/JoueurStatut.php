@@ -1,5 +1,4 @@
 <?php
-namespace R301\Modele\Joueur;
 
 enum JoueurStatut
 {

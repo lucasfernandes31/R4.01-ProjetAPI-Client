@@ -1,8 +1,9 @@
 
 <?php
 
-use R301\Controleur\UtilisateurControleur;
-use R301\Modele\Utilisateur\UtilisateurDAO;
+require_once(__DIR__ . '/../Controleur/UtilisateurControleur.php');
+require_once(__DIR__ . '/../Modele/Utilisateur/UtilisateurDAO.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"]) && isset($_POST["password"])) {
     $controleur = UtilisateurControleur::getInstance();

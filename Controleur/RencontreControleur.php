@@ -1,12 +1,9 @@
 <?php
 
-namespace R301\Controleur;
-
-use DateTime;
-use R301\Modele\Rencontre\Rencontre;
-use R301\Modele\Rencontre\RencontreDAO;
-use R301\Modele\Rencontre\RencontreLieu;
-use R301\Modele\Rencontre\RencontreResultat;
+require_once(__DIR__ . '/../Modele/Rencontre/Rencontre.php');
+require_once(__DIR__ . '/../Modele/Rencontre/RencontreDAO.php');
+require_once(__DIR__ . '/../Modele/Rencontre/RencontreLieu.php');
+require_once(__DIR__ . '/../Modele/Rencontre/RencontreResultat.php');
 
 class RencontreControleur {
     private static ?RencontreControleur $instance = null;

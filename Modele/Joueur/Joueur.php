@@ -1,8 +1,6 @@
 <?php
 
-namespace R301\Modele\Joueur;
-
-use DateTime;
+require_once(__DIR__ . '/JoueurStatut.php');
 
 class Joueur {
     private int $joueurId;

@@ -1,7 +1,7 @@
 <?php
 
-namespace R301\Modele\Rencontre;
-use DateTime;
+require_once(__DIR__ . '/RencontreLieu.php');
+require_once(__DIR__ . '/RencontreResultat.php');
 
 class Rencontre {
     private int $rencontreId;

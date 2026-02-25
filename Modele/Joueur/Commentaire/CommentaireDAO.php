@@ -1,10 +1,7 @@
 <?php
 
-namespace R301\Modele\Joueur\Commentaire;
-
-use DateTime;
-use PDO;
-use R301\Modele\DatabaseHandler;
+require_once(__DIR__ . '/Commentaire.php');
+require_once(__DIR__ . '/../../DatabaseHandler.php');
 
 class CommentaireDAO {
     private static ?CommentaireDAO $instance = null;

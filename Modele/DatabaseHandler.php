@@ -1,10 +1,5 @@
 <?php
 
-namespace R301\Modele;
-
-use Exception;
-use PDO;
-
 class DatabaseHandler {
     private static ?DatabaseHandler $instance = null;
     private readonly PDO $linkpdo;

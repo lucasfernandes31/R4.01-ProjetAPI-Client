@@ -1,7 +1,5 @@
 <?php
 
-namespace rencontre;
-
 enum Lieu {
     case DOMICILE;
     case EXTERIEUR;

@@ -1,15 +1,12 @@
 <?php
 
-namespace R301\Modele\Participation;
-
-use DateTime;
-use PDO;
-use R301\Modele\DatabaseHandler;
-use R301\Modele\Joueur\JoueurDAO;
-use R301\Modele\Rencontre\Rencontre;
-use R301\Modele\Rencontre\RencontreDAO;
-use R301\Modele\Rencontre\RencontreLieu;
-use R301\Modele\Rencontre\RencontreResultat;
+require_once(__DIR__ . '/../DatabaseHandler.php');
+require_once(__DIR__ . '/../Joueur/JoueurDAO.php');
+require_once(__DIR__ . '/../Rencontre/RencontreDAO.php');
+require_once(__DIR__ . '/Participation.php');
+require_once(__DIR__ . '/TitulaireOuRemplacant.php');
+require_once(__DIR__ . '/Performance.php');
+require_once(__DIR__ . '/Poste.php');
 
 class ParticipationDAO {
     private static ?ParticipationDAO $instance = null;

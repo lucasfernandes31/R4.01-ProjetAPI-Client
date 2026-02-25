@@ -1,7 +1,7 @@
 <?php
 
-use R301\Controleur\JoueurControleur;
-use R301\Controleur\StatistiquesControleur;
+require_once(__DIR__ . '/../Controleur/JoueurControleur.php');
+require_once(__DIR__ . '/../Controleur/StatistiquesControleur.php');
 
 $controleur = StatistiquesControleur::getInstance();
 $statistiquesEquipe = $controleur->getStatistiquesEquipe();

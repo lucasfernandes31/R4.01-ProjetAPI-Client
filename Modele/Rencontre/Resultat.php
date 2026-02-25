@@ -1,6 +1,6 @@
 <?php
 
-namespace rencontre;
+require_once(__DIR__ . '/SensDuResultat.php');
 
 class Resultat {
     private int $scoreDeLequipe;

@@ -1,12 +1,13 @@
 <?php
-namespace R301\Controleur;
 
-use R301\Modele\Participation\FeuilleDeMatch;
-use R301\Modele\Participation\Participation;
-use R301\Modele\Participation\ParticipationDAO;
-use R301\Modele\Participation\Performance;
-use R301\Modele\Participation\Poste;
-use R301\Modele\Participation\TitulaireOuRemplacant;
+require_once(__DIR__ . '/../Modele/Participation/FeuilleDeMatch.php');
+require_once(__DIR__ . '/../Modele/Participation/Participation.php');
+require_once(__DIR__ . '/../Modele/Participation/ParticipationDAO.php');
+require_once(__DIR__ . '/../Modele/Participation/Performance.php');
+require_once(__DIR__ . '/../Modele/Participation/Poste.php');
+require_once(__DIR__ . '/../Modele/Participation/TitulaireOuRemplacant.php');
+require_once(__DIR__ . '/JoueurControleur.php');
+require_once(__DIR__ . '/RencontreControleur.php');
 
 class ParticipationControleur {
     private static ?ParticipationControleur $instance = null;

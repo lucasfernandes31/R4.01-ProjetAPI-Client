@@ -1,15 +1,14 @@
 <?php
 
-namespace R301\Controleur;
-
-use DateTime;
-use R301\Modele\Joueur\Commentaire\Commentaire;
-use R301\Modele\Joueur\Commentaire\CommentaireDAO;
-use R301\Modele\Joueur\Joueur;
-use R301\Modele\Joueur\JoueurDAO;
-use R301\Modele\Joueur\JoueurStatut;
-use R301\Modele\Statistiques\StatistiquesEquipe;
-use R301\Modele\Statistiques\StatistiquesJoueurs;
+require_once(__DIR__ . '/../Modele/Joueur/Commentaire/Commentaire.php');
+require_once(__DIR__ . '/../Modele/Joueur/Commentaire/CommentaireDAO.php');
+require_once(__DIR__ . '/../Modele/Joueur/Joueur.php');
+require_once(__DIR__ . '/../Modele/Joueur/JoueurDAO.php');
+require_once(__DIR__ . '/../Modele/Joueur/JoueurStatut.php');
+require_once(__DIR__ . '/../Modele/Statistiques/StatistiquesEquipe.php');
+require_once(__DIR__ . '/../Modele/Statistiques/StatistiquesJoueurs.php');
+require_once(__DIR__ . '/RencontreControleur.php');
+require_once(__DIR__ . '/ParticipationControleur.php');
 
 class StatistiquesControleur {
     private static ?StatistiquesControleur $instance = null;

@@ -1,7 +1,5 @@
 <?php
 
-namespace R301\Vue\Component;
-
 class Select {
     private array $values = [];
     private string $name;

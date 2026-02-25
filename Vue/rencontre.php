@@ -1,8 +1,8 @@
 
 <?php
 
-use R301\Controleur\RencontreControleur;
-use R301\Vue\Component\SelectResultat;
+require_once(__DIR__ . '/../../Controleur/RencontreControleur.php');
+require_once(__DIR__ . '/../Component/SelectResultat.php');
 
 $controleur = RencontreControleur::getInstance();
 if ($_SERVER['REQUEST_METHOD'] === 'POST'

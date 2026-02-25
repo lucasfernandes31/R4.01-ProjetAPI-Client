@@ -1,6 +1,6 @@
 <?php
 
-use R301\Controleur\JoueurControleur;
+require_once(__DIR__ . '/../../Controleur/JoueurControleur.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id'])) {

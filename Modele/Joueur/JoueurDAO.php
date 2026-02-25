@@ -1,10 +1,8 @@
 <?php
 
-namespace R301\Modele\Joueur;
-
-use DateTime;
-use PDO;
-use R301\Modele\DatabaseHandler;
+require_once(__DIR__ . '/Joueur.php');
+require_once(__DIR__ . '/JoueurStatut.php');
+require_once(__DIR__ . '/../DatabaseHandler.php');
 
 class JoueurDAO {
     private static ?JoueurDAO $instance = null;

@@ -1,10 +1,9 @@
 <?php
 
-namespace R301\Modele\Rencontre;
-
-use DateTime;
-use PDO;
-use R301\Modele\DatabaseHandler;
+require_once(__DIR__ . '/../DatabaseHandler.php');
+require_once(__DIR__ . '/Rencontre.php');
+require_once(__DIR__ . '/RencontreLieu.php');
+require_once(__DIR__ . '/RencontreResultat.php');
 
 class RencontreDAO {
     private static ?RencontreDAO $instance = null;

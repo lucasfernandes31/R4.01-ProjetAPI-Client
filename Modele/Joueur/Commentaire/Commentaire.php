@@ -1,8 +1,4 @@
 <?php
-namespace R301\Modele\Joueur\Commentaire;
-
-use DateTime;
-use R301\Modele\Joueur\Joueur;
 
 class Commentaire {
     private int $commentaireId;

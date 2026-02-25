@@ -1,11 +1,9 @@
 <?php
 
-namespace R301\Controleur;
-
-use DateTime;
-use R301\Modele\Joueur\Joueur;
-use R301\Modele\Joueur\JoueurDAO;
-use R301\Modele\Joueur\JoueurStatut;
+require_once(__DIR__ . '/../Modele/Joueur/Joueur.php');
+require_once(__DIR__ . '/../Modele/Joueur/JoueurDAO.php');
+require_once(__DIR__ . '/../Modele/Joueur/JoueurStatut.php');
+require_once(__DIR__ . '/ParticipationControleur.php');
 
 class JoueurControleur {
     private static ?JoueurControleur $instance = null;

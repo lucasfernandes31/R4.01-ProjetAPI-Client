@@ -1,6 +1,6 @@
 <?php
 
-namespace rencontre;
+require_once(__DIR__ . '/Resultat.php');
 
 enum SensDuResultat {
     case GAGNE;

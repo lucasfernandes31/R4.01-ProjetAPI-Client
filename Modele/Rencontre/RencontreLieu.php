@@ -1,6 +1,6 @@
 <?php
 
-namespace R301\Modele\Rencontre;
+
 enum RencontreLieu {
     case DOMICILE;
     case EXTERIEUR;

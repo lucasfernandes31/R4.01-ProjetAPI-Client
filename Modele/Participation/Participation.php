@@ -1,9 +1,10 @@
 <?php
 
-namespace R301\Modele\Participation;
-
-use R301\Modele\Joueur\Joueur;
-use R301\Modele\Rencontre\Rencontre;
+require_once(__DIR__ . '/../Joueur/Joueur.php');
+require_once(__DIR__ . '/../Rencontre/Rencontre.php');
+require_once(__DIR__ . '/TitulaireOuRemplacant.php');
+require_once(__DIR__ . '/Performance.php');
+require_once(__DIR__ . '/Poste.php');
 
 class Participation {
     private int $participationId;

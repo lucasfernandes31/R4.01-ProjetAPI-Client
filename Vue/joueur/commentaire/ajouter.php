@@ -1,6 +1,6 @@
 <?php
 
-use R301\Controleur\CommentaireControleur;
+require_once(__DIR__ . '/../../../Controleur/CommentaireControleur.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && isset($_POST['joueurId'])
