@@ -1,12 +1,4 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Psr4AutoloaderClass.php';
-use R301\Psr4AutoloaderClass;
-
-$loader = new Psr4AutoloaderClass;
-// register the autoloader
-$loader->register();
-// register the base directories for the namespace prefix
-$loader->addNamespace('R301', '.');
 
 if (preg_match('/\.(?:png|jpg|jpeg|gif|ico|css|js)\??.*$/', $_SERVER["REQUEST_URI"])) {
     return false; // serve the requested resource as-is.
@@ -14,7 +6,7 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|ico|css|js)\??.*$/', $_SERVER["REQUEST_UR
 
 session_start();
 if ($_SERVER["REQUEST_URI"] !== "/login" && !isset($_SESSION ['username'])) {
-    header('Location: /login');
+    header('Location: Vue/login.php');
 }
 ?>
 
@@ -23,7 +15,7 @@ if ($_SERVER["REQUEST_URI"] !== "/login" && !isset($_SESSION ['username'])) {
     <head>
         <title>R3.01</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
-        <link rel="stylesheet" href="/stylesheet.css"/>
+        <link rel="stylesheet" href="/R4.01-ProjetAPI-Client/stylesheet.css"/>
         <link rel="icon" type="image/jpg" href="/favicon.jpg">
     </head>
     <body>
