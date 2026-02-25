@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../../Controleur/JoueurControleur.php');
+require_once(__DIR__ . '/../Controleur/JoueurControleur.php');
 
 $controleur = JoueurControleur::getInstance();
 if (isset($_GET['recherche']) || isset($_GET['statut'])) {
