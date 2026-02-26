@@ -1,5 +1,10 @@
 <?php
 
+namespace R301\Modele;
+
+use Exception;
+use PDO;
+
 class DatabaseHandler {
     private static ?DatabaseHandler $instance = null;
     private readonly PDO $linkpdo;
@@ -10,10 +15,10 @@ class DatabaseHandler {
 
     private function __construct(){
         try{
-            $this->server = "mysql-r401-serveur.alwaysdata.net";
-            $this->db = "r401-serveur_bd";
-            $this->login = "r401-serveur";
-            $this->mdp = "Daddydoudou54";
+            $this->server = "localhost";
+            $this->db = "r301";
+            $this->login = "r301";
+            $this->mdp = "7z3AgWdX54Zkq5!";
             $this->linkpdo=new PDO("mysql:host=".$this->server.";dbname=".$this->db,$this->login,$this->mdp);
         }catch(Exception $e){
             die("Erreur : ".$e->getMessage());

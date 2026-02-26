@@ -1,11 +1,13 @@
 <?php
 
+namespace R301\Controleur;
+
 use DateTime;
-require_once(__DIR__ . '/../Modele/Joueur/Commentaire/Commentaire.php');
-require_once(__DIR__ . '/../Modele/Joueur/Commentaire/CommentaireDAO.php');
-require_once(__DIR__ . '/../Modele/Joueur/Joueur.php');
-require_once(__DIR__ . '/../Modele/Joueur/JoueurDAO.php');
-require_once(__DIR__ . '/../Modele/Joueur/JoueurStatut.php');
+use R301\Modele\Joueur\Commentaire\Commentaire;
+use R301\Modele\Joueur\Commentaire\CommentaireDAO;
+use R301\Modele\Joueur\Joueur;
+use R301\Modele\Joueur\JoueurDAO;
+use R301\Modele\Joueur\JoueurStatut;
 
 class CommentaireControleur {
     private static ?CommentaireControleur $instance = null;

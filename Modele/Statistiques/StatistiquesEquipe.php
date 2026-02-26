@@ -1,6 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/../Rencontre/RencontreResultat.php');
+namespace R301\Modele\Statistiques;
+
+use R301\Modele\Rencontre\RencontreResultat;
 
 class StatistiquesEquipe {
     private readonly array $rencontres;

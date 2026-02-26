@@ -1,4 +1,5 @@
 <?php
+namespace R301\Modele\Participation;
 
 enum Performance: int
 {

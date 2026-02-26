@@ -1,7 +1,9 @@
 <?php
 
-require_once(__DIR__ . '/../Joueur/Joueur.php');
-require_once(__DIR__ . '/../Participation/Poste.php');
+namespace R301\Modele\Statistiques;
+
+use R301\Modele\Joueur\Joueur;
+use R301\Modele\Participation\Poste;
 
 class StatistiquesJoueurs {
     private readonly array $participations;

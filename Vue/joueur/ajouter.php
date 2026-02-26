@@ -1,9 +1,9 @@
 <h1>Ajouter un joueur</h1>
 <?php
 
-require_once(__DIR__ . '/../../Controleur/JoueurControleur.php');
-require_once(__DIR__ . '/../../Modele/Joueur/JoueurStatut.php');
-require_once(__DIR__ . '/../Component/Formulaire.php');
+use R301\Controleur\JoueurControleur;
+use R301\Modele\Joueur\JoueurStatut;
+use R301\Vue\Component\Formulaire;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && isset($_POST['nom'])

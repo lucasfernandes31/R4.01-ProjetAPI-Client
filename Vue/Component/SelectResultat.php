@@ -1,7 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/Select.php');
-require_once(__DIR__ . '/../../Modele/Rencontre/RencontreResultat.php');
+namespace R301\Vue\Component;
+
+use R301\Modele\Rencontre\RencontreResultat;
 
 class SelectResultat extends Select {
     public function __construct(

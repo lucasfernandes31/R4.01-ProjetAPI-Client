@@ -2,9 +2,9 @@
 
 <?php
 
-require_once(__DIR__ . '/../../Controleur/RencontreControleur.php');
-require_once(__DIR__ . '/../../Modele/Rencontre/RencontreLieu.php');
-require_once(__DIR__ . '/../Component/Formulaire.php');
+use R301\Controleur\RencontreControleur;
+use R301\Modele\Rencontre\RencontreLieu;
+use R301\Vue\Component\Formulaire;
 
 
 $controleur = RencontreControleur::getInstance();

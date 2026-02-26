@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/../../Controleur/CommentaireControleur.php');
-require_once(__DIR__ . '/../../Controleur/JoueurControleur.php');
-require_once(__DIR__ . '/../Component/Formulaire.php');
+use R301\Controleur\CommentaireControleur;
+use R301\Controleur\JoueurControleur;
+use R301\Vue\Component\Formulaire;
 
 if (!isset($_GET['id'])) {
     header('Location: /joueur');

@@ -1,5 +1,7 @@
 <?php
 
+namespace R301\Vue\Component;
+
 class Formulaire {
     private $formulaire;
     //Constructeur

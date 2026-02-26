@@ -1,15 +1,14 @@
 
 <?php
 
-require_once(__DIR__ . '/../Controleur/UtilisateurControleur.php');
-require_once(__DIR__ . '/../Modele/Utilisateur/UtilisateurDAO.php');
-
+use R301\Controleur\UtilisateurControleur;
+use R301\Modele\Utilisateur\UtilisateurDAO;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"]) && isset($_POST["password"])) {
     $controleur = UtilisateurControleur::getInstance();
 
     if ($controleur->seConnecter(trim($_POST["username"]), trim($_POST["password"]))) {
-        header("Location: joueur.php");
+        header("Location: joueur");
         die();
     } else {
         $erreur = "Le nom d'Utilisateur ou le mot de passe est incorrect";
@@ -21,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"]) && isset($
     <div class="CentredContainer">
         <h1>Login</h1>
         <div class="container">
-            <form action="login.php" method="post">
+            <form action="login" method="post">
                 <div class="row">
                     <div class="col-20">
                         <label for="username">Username : </label>

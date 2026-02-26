@@ -1,7 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/Select.php');
-require_once(__DIR__ . '/../../Modele/Participation/Performance.php');
+namespace R301\Vue\Component;
+
+use R301\Modele\Participation\Performance;
 
 class SelectPerformance extends Select {
 

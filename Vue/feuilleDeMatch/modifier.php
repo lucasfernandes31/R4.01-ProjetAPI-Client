@@ -1,8 +1,9 @@
 <?php
 
-require_once(__DIR__ . '/../../Controleur/ParticipationControleur.php');
-require_once(__DIR__ . '/../../Modele/Participation/Poste.php');
-require_once(__DIR__ . '/../../Modele/Participation/TitulaireOuRemplacant.php');
+use R301\Controleur\ParticipationControleur;
+use R301\Controleur\Participation\SupprimerParticipation;
+use R301\Modele\Participation\Poste;
+use R301\Modele\Participation\TitulaireOuRemplacant;
 
 $controleur = ParticipationControleur::getInstance();
 

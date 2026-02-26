@@ -1,7 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/../DatabaseHandler.php');
-require_once(__DIR__ . '/Utilisateur.php');
+namespace R301\Modele\Utilisateur;
+
+use R301\Modele\DatabaseHandler;
 
 class UtilisateurDAO {
     private static ?UtilisateurDAO $instance = null;

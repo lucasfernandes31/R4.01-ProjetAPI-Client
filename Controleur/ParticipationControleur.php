@@ -1,21 +1,22 @@
 <?php
+namespace R301\Controleur;
 
-require_once(__DIR__ . '/../Modele/Participation/FeuilleDeMatch.php');
-require_once(__DIR__ . '/../Modele/Participation/Participation.php');
-require_once(__DIR__ . '/../Modele/Participation/ParticipationDAO.php');
-require_once(__DIR__ . '/../Modele/Participation/Performance.php');
-require_once(__DIR__ . '/../Modele/Participation/Poste.php');
-require_once(__DIR__ . '/../Modele/Participation/TitulaireOuRemplacant.php');
-require_once(__DIR__ . '/JoueurControleur.php');
-require_once(__DIR__ . '/RencontreControleur.php');
+use R301\Modele\Participation\FeuilleDeMatch;
+use R301\Modele\Participation\Participation;
+use R301\Modele\Participation\ParticipationDAO;
+use R301\Modele\Participation\Performance;
+use R301\Modele\Participation\Poste;
+use R301\Modele\Participation\TitulaireOuRemplacant;
 
 class ParticipationControleur {
     private static ?ParticipationControleur $instance = null;
     private readonly ParticipationDAO $participations;
+    private readonly JoueurControleur $joueurs;
     private readonly RencontreControleur $rencontres;
 
     private function __construct() {
         $this->participations = ParticipationDAO::getInstance();
+        $this->joueurs = JoueurControleur::getInstance();
         $this->rencontres = RencontreControleur::getInstance();
     }
 
@@ -49,7 +50,7 @@ class ParticipationControleur {
         ) {
             return false;
         } else {
-            $joueur = JoueurControleur::getInstance()->getJoueurById($joueurId);
+            $joueur = $this->joueurs->getJoueurById($joueurId);
             $rencontre = $this->rencontres->getRenconterById($rencontreId);
 
             $participationACreer = new Participation(
@@ -74,7 +75,7 @@ class ParticipationControleur {
         $participationAModifier = $this->participations->selectParticipationById($participationId);
 
         if ($participationAModifier->getParticipant()->getJoueurId() != $joueurId) {
-            $participationAModifier->setParticipant(JoueurControleur::getInstance()->getJoueurById($joueurId));
+            $participationAModifier->setParticipant($this->joueurs->getJoueurById($joueurId));
         }
 
         $participationAModifier->setPoste($poste);

@@ -1,10 +1,10 @@
 <?php
 
-require_once(__DIR__ . '/../../Controleur/JoueurControleur.php');
-require_once(__DIR__ . '/../../Controleur/ParticipationControleur.php');
-require_once(__DIR__ . '/../../Modele/Participation/Poste.php');
-require_once(__DIR__ . '/../../Modele/Participation/TitulaireOuRemplacant.php');
-require_once(__DIR__ . '/../Component/Select.php');
+use R301\Controleur\JoueurControleur;
+use R301\Controleur\ParticipationControleur;
+use R301\Modele\Participation\Poste;
+use R301\Modele\Participation\TitulaireOuRemplacant;
+use R301\Vue\Component\Select;
 
 $controleur = ParticipationControleur::getInstance();
 $joueurControleur = JoueurControleur::getInstance();
