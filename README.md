@@ -24,15 +24,10 @@ Listen 8080
 
     <Directory "C:/xampp/htdocs/R4.01-ProjetAPI-Client">
         Options Indexes FollowSymLinks
-        AllowOverride None
+        AllowOverride All
         Require all granted
     </Directory>
 
-    RewriteEngine On
-    RewriteCond %{REQUEST_URI} !\.(css|jpg)$
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ /index.php [QSA,L]
 </VirtualHost>
 ```
 
