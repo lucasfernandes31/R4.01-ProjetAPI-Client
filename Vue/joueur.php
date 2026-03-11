@@ -13,7 +13,6 @@ if (isset($_GET['recherche']) || isset($_GET['statut'])) {
 
 // fetch avec file_get_contents et récupération de la data
 $response = file_get_contents($url);
-print($response);
 $joueurs = json_decode($response, true)['data'];
 
 ?>
