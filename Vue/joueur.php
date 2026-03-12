@@ -1,7 +1,5 @@
 <?php
 
-use R301\Controleur\JoueurControleur;
-
 $urlAPI = "http://localhost:8081/joueur";
 
 // Préparation de l'url pour appel à l'API
