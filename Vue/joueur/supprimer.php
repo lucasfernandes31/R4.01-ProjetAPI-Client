@@ -19,10 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Envoi de la requête et récupération de la réponse
         $response = file_get_contents($urlAPI, false, $context);
+        var_dump($response);      // voir la réponse brute
         $responseTab = json_decode($response, true);
 
         // Vérification du status_code retourné
-        if (!$responseTab['status_code'] === 200) {
+        if ($responseTab['status_code'] !== 200) {
             echo "Erreur lors de la suppression du joueur";
             error_log("Erreur lors de la suppression du joueur");
         }
