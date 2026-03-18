@@ -7,7 +7,7 @@ use R301\Vue\Component\Formulaire;
 
 $urlAPI = "http://localhost:8081/rencontre";
 
-if ($_SERVER['REQUEST_METHOD'] === 'PUT'
+if ($_SERVER['REQUEST_METHOD'] === 'POST'
         && isset($_GET['id'])
         && isset($_POST['dateHeure'])
         && isset($_POST['equipeAdverse'])
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT'
 ) {
     // On crée d'abord le contenu JSON
     $data=json_encode([
-        'id'=>$_GET['id'],
+        'rencontreId'=>$_GET['id'],
         'dateHeure'=>$_POST['dateHeure'],
         'equipeAdverse'=>$_POST['equipeAdverse'],
         'adresse'=>$_POST['adresse'],
@@ -37,10 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT'
     $responseTab=json_decode($response,true);
 
     if($responseTab['status_code']==200){
+        $_SESSION['success'] = "La rencontre a bien été modifiée.";
         header('Location: /rencontre');
     }else{
-        echo($responseTab['status_message']);
-        error_log("Erreur lors de la mise à jour de la rencontre");
+        $_SESSION['error'] = "La modification a échouée.";
+        error_log("Erreur lors de la mise à jour de la rencontre.");
     }
 } else {
     if (!isset($_GET['id'])) {
@@ -50,9 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT'
         $response = file_get_contents($urlAPI);
         $responseTab = json_decode($response, true);
         $rencontre = $responseTab['data'];
+        $dateFormatee = DateTime::createFromFormat('d/m/Y H:i', $rencontre['dateEtHeure'])
+                         ->format('Y-m-d\TH:i');
 
         $formulaire = new Formulaire("/rencontre/modifier?id=" . $rencontre['rencontreId']);
-        $formulaire->setDateTime("Date", "dateHeure", date("Y-m-d H:i"), $rencontre['dateEtHeure']);
+        $formulaire->setDateTime("Date", "dateHeure", date("Y-m-d\TH:i"), $dateFormatee);
         $formulaire->setText("Equipe adverse", "equipeAdverse", "", $rencontre['equipeAdverse']);
         $formulaire->setText("Adresse", "adresse", "", $rencontre['adresse']);
         $formulaire->setSelect("Lieu", array_map(function (RencontreLieu $lieu) {

@@ -4,6 +4,17 @@
 use R301\Controleur\RencontreControleur;
 use R301\Vue\Component\SelectResultat;
 
+// Message en fonction de si l'ajout du commentaire a marché ou non.
+if (!empty($_SESSION['success'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['success']) . '");</script>';
+    unset($_SESSION['success']);
+}
+
+if (!empty($_SESSION['error'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['error']) . '");</script>';
+    unset($_SESSION['error']);
+}
+
 $controleur = RencontreControleur::getInstance();
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
         && isset($_POST['action'])
@@ -61,7 +72,7 @@ $rencontres = $controleur->listerToutesLesRencontres();
         <form action="rencontre" method="post">
             <tr>
                 <input type="hidden" name="rencontreId" value="<?php echo $rencontre->getRencontreId(); ?>" />
-                <td><?php echo $rencontre->getDateEtHeure()->format('d/m/Y H:i') ?></td>
+                <td><?php echo $rencontre->getDateEtHeure()->format('Y-m-d\TH:i') ?></td>
                 <td><?php echo $rencontre->getEquipeAdverse() ?></td>
                 <td><?php echo $rencontre->getAdresse() ?></td>
                 <td><?php echo $rencontre->getLieu()->name ?></td>
