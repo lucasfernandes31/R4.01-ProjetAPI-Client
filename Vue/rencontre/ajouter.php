@@ -32,9 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     ]);
 
     $response= file_get_contents($urlAPI,false,$context);
-    var_dump($response);
-      var_dump(DateTime::createFromFormat('Y-m-d\TH:i', '2026-03-26T14:00'));
-
+    var_dump(htmlspecialchars($response));
     $responseTab=json_decode($response,true);
 
     if($responseTab['status_code']==201){
