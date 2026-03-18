@@ -1,8 +1,16 @@
 
 <?php
 
-use R301\Controleur\RencontreControleur;
 use R301\Vue\Component\SelectResultat;
+
+$urlAPI = "http://localhost:8081/rencontre";
+
+// Préparation de l'url pour appel à l'API
+if (isset($_GET['recherche']) || isset($_GET['statut'])) {
+    $url = $urlAPI . "/recherche/" . urlencode($_GET['recherche']) . "/" . urlencode($_GET['statut']);
+} else {
+    $url = $urlAPI;
+}
 
 // Message en fonction de si l'ajout du commentaire a marché ou non.
 if (!empty($_SESSION['success'])) {
@@ -15,7 +23,6 @@ if (!empty($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 
-$controleur = RencontreControleur::getInstance();
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
         && isset($_POST['action'])
         && isset($_POST['rencontreId'])
@@ -32,14 +39,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
             die();
         case "enregistrerResultat":
             if (isset($_POST['resultat'])) {
-                if (!$controleur->enregistrerResultat($_POST['rencontreId'], $_POST['resultat'])) {
-                    error_log("Erreur lors de la mise à jour du resultat");
+                $data=json_encode([
+                    'rencontreId'=>$_POST['rencontreId'],
+                    'resultat'=>$_POST['resultat']
+                ]);
+                $context=stream_context_create([
+                        'http'=>[
+                            'method'=>'PUT',
+                            'header'=>'Content-Type: application/json',
+                            'content'=>$data,
+                            'ignore_errors'=>true//pour que ça plante pas automatiquement
+                        ]
+                    ]);
+
+                $response= file_get_contents($url,false,$context);
+
+                $responseTab=json_decode($response,true);
+
+                if($responseTab['status_code']==201){
+                    $_SESSION['success'] = "Le résultat a bien été rempli.";
+                    header('Location: /rencontre');
+                }else{
+                    $_SESSION['error'] = "L'ajout du résultat a échoué.";
+                    error_log("Erreur lors de l'ajout du résultat.");                    
                 }
                 header('Location: /rencontre');
                 die();
             }
         case "supprimer":
-            if (!$controleur->supprimerRencontre($_POST['rencontreId'])) {
+            // Création du contexte (méthode DELETE)
+            $context = stream_context_create([
+                'http' => [
+                    'method' => 'DELETE',
+                    'header' => 'Content-Type: application/json',
+                    'ignore_errors' => true
+                ]
+            ]);
+
+            $response = file_get_contents($url, false, $context);
+            $responseTab = json_decode($response, true);
+
+            if ($responseTab['status_code'] !== 200) {
+                // Stocker l'erreur en session
+                $_SESSION['error'] = "Impossible de supprimer la rencontre, car la date est dépassée.";
+            } else {
+                $_SESSION['success'] = "Rencontre supprimée avec succès";
                 error_log("Erreur lors de la suppression de la rencontre");
             }
             header('Location: /rencontre');
@@ -47,7 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     }
 } else {
 
-$rencontres = $controleur->listerToutesLesRencontres();
+$response = file_get_contents($url);
+$rencontres = json_decode($response, true)['data'];
 
 
 ?>
@@ -66,7 +111,7 @@ $rencontres = $controleur->listerToutesLesRencontres();
 
             $selectResultat = new SelectResultat(
                     null,
-                    $rencontre->getResultat()?->name
+                    $rencontre['resultat']
             );
         ?>
         <form action="rencontre" method="post">
