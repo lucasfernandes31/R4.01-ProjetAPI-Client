@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['commentaireId'])) {
 
         // Transformation de l'URL pour cibler le commentaire sélectionné
-        $urlAPI = $urlAPI . "?commentaireId=" . $_POST['commentaireId'];
+        $urlAPI = $urlAPI . "/" . $_POST['commentaireId'];
 
         // Création du contexte (méthode DELETE)
         $context = stream_context_create([
@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$responseTab['status_code'] === 200) {
             error_log("Erreur lors de la suppression du commentaire");
+            $_SESSION['error'] = "Erreur lors de la suppression du commentaire.";
+        } else {
+            $_SESSION['success'] = "Le commentaire a été supprimé avec succès.";
         }
     }
 }

@@ -1,10 +1,21 @@
 <?php
 
+// Message d'erreur si la suppression ne marche pas.
+if (!empty($_SESSION['error'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['error']) . '");</script>';
+    unset($_SESSION['error']);
+}
+
+if (!empty($_SESSION['success'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['success']) . '");</script>';
+    unset($_SESSION['success']);
+}
+
 $urlAPI = "http://localhost:8081/joueur";
 
 // Préparation de l'url pour appel à l'API
 if (isset($_GET['recherche']) || isset($_GET['statut'])) {
-    $url = $urlAPI . "?recherche=" . urlencode($_GET['recherche']) . "&statut=" . urlencode($_GET['statut']);
+    $url = $urlAPI . "/recherche/" . urlencode($_GET['recherche']) . "/" . urlencode($_GET['statut']);
 } else {
     $url = $urlAPI;
 }

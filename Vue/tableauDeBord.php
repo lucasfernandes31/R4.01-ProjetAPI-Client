@@ -6,7 +6,7 @@ $urlAPIStatistiques = 'http://localhost:8081/statistiques';
 
 //////////
 // Récupération de la liste des statistiques de l'équipe
-$response = file_get_contents($urlAPIStatistiques."?equipe=1");
+$response = file_get_contents($urlAPIStatistiques."/equipe/");
 $responseTab = json_decode($response, true);
 
 if($responseTab['status_code'] !== 200){
@@ -21,7 +21,7 @@ $statistiquesEquipe = $responseTab['data'];
 
 //////////
 // Récupération de la liste des statistiques de l'équipe
-$response = file_get_contents($urlAPIStatistiques."?joueurs=1");
+$response = file_get_contents($urlAPIStatistiques."/joueurs/");
 $responseTab = json_decode($response, true);
 
 if($responseTab['status_code'] !== 200){

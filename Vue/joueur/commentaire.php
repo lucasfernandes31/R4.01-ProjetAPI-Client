@@ -2,8 +2,18 @@
 
 use R301\Vue\Component\Formulaire;
 
-$urlAPIJoueur = 'http://localhost:8081/joueur';
-$urlAPICommentaire = 'http://localhost:8081/commentaire';
+// Message en fonction de si l'ajout du commentaire a marché ou non.
+if (!empty($_SESSION['success'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['success']) . '");</script>';
+    unset($_SESSION['success']);
+}
+
+if (!empty($_SESSION['error'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['error']) . '");</script>';
+    unset($_SESSION['error']);
+}
+
+$urlAPI = 'http://localhost:8081/joueur';
 
 if (!isset($_GET['id'])) {
     header('Location: /joueur');
@@ -11,7 +21,7 @@ if (!isset($_GET['id'])) {
 }
 
 // Inclusion de l'ID dans l'URL
-$urlAPIJoueur = $urlAPIJoueur . "?id=" . $_GET['id'];
+$urlAPIJoueur = $urlAPI . "/" . $_GET['id'];
 
 // Envoi de la requête GET (pour récupérer le joueur)
 $response = file_get_contents($urlAPIJoueur);
@@ -40,7 +50,7 @@ $form->addButton("submit", "create", "Publier le commentaire", "Publier le comme
 echo $form;
 
 // Construction URL pour récupérer les commentaires
-$urlAPICommentaire = $urlAPICommentaire . "?joueurId=" . $joueur['joueur_id'];
+$urlAPICommentaire = $urlAPI . "/" . $joueur['joueur_id'] . "/commentaire" ;
 
 // Requete GET
 $response = file_get_contents($urlAPICommentaire);

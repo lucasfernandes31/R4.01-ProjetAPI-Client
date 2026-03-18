@@ -5,9 +5,14 @@
 use R301\Modele\Joueur\JoueurStatut;
 use R301\Vue\Component\Formulaire;
 
+// Message d'erreur si l'ajout ne marche pas.
+if (!empty($_SESSION['error'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['error']) . '");</script>';
+    unset($_SESSION['error']);
+}
+
 
 $urlAPI = "http://localhost:8081/joueur";
-
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
@@ -48,10 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     $responseTab = json_decode($response, true);
 
     if ($responseTab['status_code'] == 201) {
+        $_SESSION['success'] = "Joueur ajouté avec succès.";
         header('Location: /joueur');
     } else {
-        echo "Erreur lors de la création du joueur.";
+        $_SESSION['error'] = "Erreur dans la création du joueur. Assurez-vous que les données saisies sont correctes.";
         error_log("Erreur lors de la création du joueur");
+        header('Location: /joueur/ajouter');
     }
 } else {
     $formulaire = new Formulaire("/joueur/ajouter");

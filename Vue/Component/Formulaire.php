@@ -83,7 +83,7 @@ class Formulaire {
             ';
         }
         $this->formulaire .= '
-                <div><textarea name="'.$name.'">'.$value.'</textarea></div>
+                <div><textarea name="'.$name.'" required>'.$value.'</textarea></div>
             ';
         $this->formulaire .= '</div>';
     }

@@ -27,8 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     $response = file_get_contents($urlAPI, false, $context);
     $responseTab = json_decode($response, true);
 
-    if (!$responseTab['status_code'] === 200) {
+    if ($responseTab['status_code'] !== 200) {
         error_log("Erreur lors de la création du commentaire");
+        $_SESSION['error'] = "Erreur lors de la création du commentaire.";
+    } else {
+        $_SESSION['success'] = "Le commentaire a été ajouté avec succès.";
     }
 }
 

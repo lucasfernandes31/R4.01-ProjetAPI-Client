@@ -4,6 +4,12 @@
 use R301\Modele\Joueur\JoueurStatut;
 use R301\Vue\Component\Formulaire;
 
+// Message d'erreur si la modif ne marche pas.
+if (!empty($_SESSION['error'])) {
+    echo '<script>alert("' . htmlspecialchars($_SESSION['error']) . '");</script>';
+    unset($_SESSION['error']);
+}
+
 $urlAPI = 'http://localhost:8081/joueur';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
@@ -18,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
 ) {
 
     // Inclusion de l'ID dans l'URL
-    $urlAPI = $urlAPI . "?id=" . $_GET['id'];
+    $urlAPI = $urlAPI . "/" . $_GET['id'];
 
     // Création du contenu envoyé
     $data = json_encode([
@@ -47,10 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     $responseTab = json_decode($response, true);
 
     if ($responseTab['status_code'] === 200) {
+        $_SESSION['success'] = "Joueur modifié avec succès.";
         header('Location: /joueur');
     }else{
-        echo "Erreur lors de la modification du joueur";
+        $_SESSION['error'] = "Erreur dans la modification du joueur. Assurez-vous que les données saisies sont correctes.";
         error_log("Erreur lors de la modification du joueur");
+        header('Location: /joueur/modifier?id=' . $_GET['id']);
     }
 } else {
     if (!isset($_GET['id'])) {
@@ -58,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     } else {
 
         // Inclusion de l'ID dans l'URL
-        $urlAPI = $urlAPI . "?id=" . $_GET['id'];
+        $urlAPI = $urlAPI . "/" . $_GET['id'];
 
         // Envoi de la requête GET
         $response = file_get_contents($urlAPI);
