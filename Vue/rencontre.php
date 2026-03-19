@@ -1,4 +1,3 @@
-
 <?php
 
 use R301\Vue\Component\SelectResultat;
@@ -66,25 +65,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
                 header('Location: /rencontre');
                 die();
             }
+            break;
         case "supprimer":
+            $urlDelete = $urlAPI . "/" . $_POST['rencontreId']; // il faut changer l'url car pour modifier on met l'id dans le body donc on peut le récupérer par POST mais pour le supprimer c'est dans l'url donc on a pas le choix
             // Création du contexte (méthode DELETE)
             $context = stream_context_create([
                 'http' => [
                     'method' => 'DELETE',
-                    'header' => 'Content-Type: application/json',
                     'ignore_errors' => true
                 ]
             ]);
-
-            $response = file_get_contents($url, false, $context);
+            $response = file_get_contents($urlDelete, false, $context);
             $responseTab = json_decode($response, true);
 
             if ($responseTab['status_code'] !== 200) {
                 // Stocker l'erreur en session
                 $_SESSION['error'] = "Impossible de supprimer la rencontre, car la date est dépassée.";
+                error_log("Erreur lors de la suppression de la rencontre");
             } else {
                 $_SESSION['success'] = "Rencontre supprimée avec succès";
-                error_log("Erreur lors de la suppression de la rencontre");
             }
             header('Location: /rencontre');
             die();
@@ -116,24 +115,24 @@ $rencontres = json_decode($response, true)['data'];
         ?>
         <form action="rencontre" method="post">
             <tr>
-                <input type="hidden" name="rencontreId" value="<?php echo $rencontre->getRencontreId(); ?>" />
-                <td><?php echo $rencontre->getDateEtHeure()->format('Y-m-d\TH:i') ?></td>
-                <td><?php echo $rencontre->getEquipeAdverse() ?></td>
-                <td><?php echo $rencontre->getAdresse() ?></td>
-                <td><?php echo $rencontre->getLieu()->name ?></td>
-                <?php if ($rencontre->estPassee() && $rencontre->getResultat() ===null): ?>
+                <input type="hidden" name="rencontreId" value="<?php echo $rencontre['rencontreId'] ?>" />
+                <td><?php echo $rencontre['dateEtHeure']?></td>
+                <td><?php echo $rencontre['equipeAdverse'] ?></td>
+                <td><?php echo $rencontre['adresse'] ?></td>
+                <td><?php echo $rencontre['lieu'] ?></td>
+                <?php if ((DateTime::createFromFormat('d/m/Y H:i', $rencontre['dateEtHeure'])<new DateTime()) && $rencontre['resultat'] ===null): ?>
                     <td><?php $selectResultat->toHTML(); ?></td>
                 <?php else: ?>
-                    <td><?php echo $rencontre->getResultat()?->name ?></td>
+                    <td><?php echo $rencontre['resultat'] ?></td>
                 <?php endif; ?>
                 <td class="actions">
-                    <?php if (!$rencontre->estPassee()): ?>
+                    <?php if (!(DateTime::createFromFormat('d/m/Y H:i', $rencontre['dateEtHeure'])<new DateTime())): ?>
                     <button name="action" value="ouvrirFeuilleDeMatch" class="info">Feuilles de match</button>
                     <button name="action" value="modifier" class="update">Modifier</button>
                     <button name="action" value="supprimer" class="delete">Supprimer</button>
                     <?php else: ?>
                     <button name="action" value="ouvrirEvaluations" class="info">Évaluations</button>
-                    <?php if ($rencontre->estPassee() && $rencontre->getResultat() ===null): ?>
+                    <?php if ((DateTime::createFromFormat('d/m/Y H:i', $rencontre['dateEtHeure'])<new DateTime()) && $rencontre['resultat'] ===null): ?>
                     <button class="create" name="action" value="enregistrerResultat">Enregistrer résultat</button>
                     <?php endif; ?>
                     <?php endif; ?>
